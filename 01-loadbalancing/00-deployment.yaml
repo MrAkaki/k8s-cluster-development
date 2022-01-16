@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-app-deployment
+  namespace: test
+  labels:
+    app: web-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: web-app
+  template:
+    metadata:
+      labels:
+        app: web-app
+    spec:
+      containers:
+      - name: web-app
+        image: alexvargasbenamburg/test-web-app:latest
+        ports:
+        - containerPort: 7777
+        resources:
+          limits:
+            cpu: 500m
+          requests:
+            cpu: 200m
